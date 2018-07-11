@@ -1,4 +1,4 @@
-# vue_test
+# f2e_exercise
 
 > A Vue.js project
 
