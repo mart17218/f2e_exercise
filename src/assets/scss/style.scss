@@ -1,0 +1,123 @@
+@import '_variables';
+@import '_mixin';
+@import '_icomoon';
+@import '~sass-rem';
+
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $white;
+}
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.view-box {
+  height: 100%;
+  overflow: hidden;
+  background: $darkBlue;
+
+  aside {
+    width: rem(320px);
+    height: 100%;
+
+    .top-block, .bottom-block {
+      flex: 0 1 auto;
+      padding-left: rem(12px);
+    }
+    .main-block {
+      flex: 1 1 auto;
+      padding-left: rem(12px);
+
+      a {
+        color: $white;
+      }
+      > div {
+        font-size: rem(24px);
+        padding: rem(12px) 0;
+      }
+    }
+    .top-block {
+      height: 12%;
+      font-size: rem(26px);
+      display: flex;
+      align-items: center;
+
+      .profile-photo {
+        width: rem(80px);
+        height: rem(80px);
+        border: 1px solid $white;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      span {
+        &.name {
+          margin-left: rem(14px);
+          font-weight: 500;
+        }
+      }
+    }
+    .bottom-block {
+      height: 40%;
+
+      a {
+        color: $white;
+      }
+      > div {
+        font-size: rem(24px);
+        padding: rem(12px) 0;
+      }
+    }
+
+  }
+  article {
+    &.main-container {
+      height: 100%;
+      width: calc(100% - #{rem(320px)});
+      float: left;
+      
+      section {
+        height: 100%;
+
+        h2 {
+          &.page-title {
+            height: rem(100px);
+            padding: rem(36px 36px 42px 12px);
+          }
+        }
+        .main-content {
+          height: calc(100% - #{rem(100px)});
+
+          .info-card {
+            .ivu-card-body {
+              width: 100%;
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.flex {
+  display: flex;
+  &.flex-vertical {
+    flex-direction: column;
+  }
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.pointer {
+  cursor: pointer;
+}
