@@ -1,10 +1,11 @@
 <template>
     <div class="main-content">
       <VuePerfectScrollbar>
-        <div class="flex-start-block">
+        <div class="flex-start-block" style="padding: 12px 18px;">
           <Card :bordered="false" v-for="(item, idx) in movieCards" :key="idx" class="info-card">
             <div class="post-box">
-              <img :src="item.img_src">
+              <!-- <img :src="item.img_src"> -->
+              <div class="poster" :style="'background-image: url(' + item.img_src + ');'">&nbsp;</div>
               <div class="score-box">{{ item.score }}</div>
             </div>
             <div>
@@ -38,7 +39,9 @@ export default {
       {id: 'm3', name: 'Solo', director: 'Ron Howard', score: 8.3, poster: 'https://starwarsblog.starwars.com/wp-content/uploads/sites/8/2018/04/solo-official-poster.jpg'},
       {id: 'm4', name: 'How to Train Your Dragon 2', director: 'Dean DeBlois', score: 8.5, poster: 'http://fo4mw16y1z42edr6j2m4n6vt.wpengine.netdna-cdn.com/wp-content/uploads/1978322_10153024527897524_5507304176848205706_o.jpg'},
       {id: 'm5', name: 'DUNKIRK', director: 'Christopher Nolan', score: 7.2, poster: 'http://pop.inquirer.net/files/2017/06/BBAY_VERT_IMAX_INTL_2764x4096_master-rev-1.png'},
-      {id: 'm6', name: 'Coco', director: 'Lee Unkrich, Adrian Molina', score: 9.1, poster: 'http://www.mommymusings.com/wp-content/uploads/2017/09/Coco59b807c1a7720.jpg'}
+      {id: 'm6', name: 'Coco', director: 'Lee Unkrich, Adrian Molina', score: 9.1, poster: 'http://www.mommymusings.com/wp-content/uploads/2017/09/Coco59b807c1a7720.jpg'},
+      {id: 'm7', name: 'Hangover', director: 'Todd Phillips', score: 9.2, poster: 'http://img.moviepostershop.com/the-hangover-movie-poster-2009-1020488737.jpg'},
+      {id: 'm8', name: 'Jumanji: Welcome to the Jungle', director: 'Jake Kasdan', score: 8.8, poster: 'https://media-cache.cinematerial.com/p/500x/zeegh0s4/jumanji-welcome-to-the-jungle-british-movie-poster.jpg'}
     ];
 
     vm.$emit('returnCurrPath', vm.returnCurrPath);
@@ -99,20 +102,21 @@ export default {
       overflow: hidden;
       position: relative;
 
-      img {
-        width: 84%;
-        height: auto;
-        margin-top: 5%;
-        box-shadow:  0px 6px 23px 0px rgba(0,0,0,0.75);
+      .poster {
+        height: 480px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center bottom;
       }
       .score-box {
-        width: 36px;
-        height: 36px;
+        $box-width: 40px;
+        width: $box-width;
+        height: $box-width;
         bottom: 10%;
-        right: calc(8% - 18px);
+        right: calc(8% - (#{$box-width} / 2));
         position: absolute;
         text-align: center;
-        line-height: 36px;
+        line-height: $box-width;
         border-radius: 50%;
         color: $white;
         background-color: $orange;
