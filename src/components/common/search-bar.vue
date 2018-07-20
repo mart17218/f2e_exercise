@@ -25,8 +25,8 @@
   }
   button {
     &.submit {
-      height: 40px;
-      width: 40px;
+      height: 70px;
+      width: 70px;
       border-radius: 50%;
       color: $white;
       font-size: rem(16px);

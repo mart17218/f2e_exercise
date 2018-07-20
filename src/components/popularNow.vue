@@ -3,8 +3,7 @@
       <VuePerfectScrollbar>
         <div class="flex-start-block" style="padding: 12px 18px;">
           <Card :bordered="false" v-for="(item, idx) in movieCards" :key="idx" class="info-card">
-            <div class="post-box">
-              <!-- <img :src="item.img_src"> -->
+            <div class="poster-box">
               <div class="poster" :style="'background-image: url(' + item.img_src + ');'">&nbsp;</div>
               <div class="score-box">{{ item.score }}</div>
             </div>
@@ -93,27 +92,31 @@ export default {
     }
     .card-subtitle {
       margin-left: 5%;
+      margin-bottom: 56px;
       font-size: rem(22px);
       opacity: 0.72;
     }
-    .post-box {
-      width: 100%;
+    .poster-box {
+      height: 495px;
       text-align: center;
       overflow: hidden;
       position: relative;
 
       .poster {
-        height: 480px;
+        height: 450px;
+        width: 304px;
+        margin: 0 auto;
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: cover;
         background-position: center bottom;
+        box-shadow: 0 8px 29px 0 $black;
       }
       .score-box {
-        $box-width: 40px;
+        $box-width: 60px;
         width: $box-width;
         height: $box-width;
-        bottom: 10%;
-        right: calc(8% - (#{$box-width} / 2));
+        bottom: 13%;
+        right: calc(9% - (#{$box-width} / 2));
         position: absolute;
         text-align: center;
         line-height: $box-width;
@@ -121,6 +124,7 @@ export default {
         color: $white;
         background-color: $orange;
         box-shadow: 0 6px 15px 0 $black, inset 0 -5px 10px 0 #c77802;
+        font-size: rem(28px);
       }
     }
   }
