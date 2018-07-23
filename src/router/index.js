@@ -1,14 +1,12 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Popper from 'popper.js'
-import Login from '@/Login'
+import Vue from 'vue';
+import Router from 'vue-router';
 // 1st level components
-import mainNav from '@/components/mainNav'
+import mainNav from '@/components/mainNav';
 // 2nd level components
-import myFavorite from '@/components/myFavorite'
-import popularNow from '@/components/popularNow'
+import myFavorite from '@/components/myFavorite';
+import popularNow from '@/components/popularNow';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
@@ -35,4 +33,4 @@ export default new Router({
       ]
     }
   ]
-})
+});

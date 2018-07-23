@@ -1,13 +1,12 @@
 {
-  "name": "factory",
+  "name": "movie",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "node-sass": "node-sass -w ./src/assets/scss/navvis/ -o ./static/css/",
-    "node-sass-min": "node-sass -w ./src/assets/scss/baidu/ -o ./static/css/ --output-style compressed"
+    "lint": "eslint src/*.vue"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -18,12 +17,14 @@
     "popper.js": "^1.14.3",
     "sass-rem": "^2.0.1",
     "vue": "^2.5.2",
+    "vue-lodash": "^2.0.0",
     "vue-perfect-scrollbar": "^0.1.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
+    "babel-eslint": "^8.2.6",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^7.1.1",
     "babel-plugin-syntax-jsx": "^6.18.0",
@@ -34,6 +35,10 @@
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-loader": "^2.1.0",
+    "eslint-plugin-import": "^2.13.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
@@ -55,7 +60,6 @@
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
-    "vue-lodash": "^2.0.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
