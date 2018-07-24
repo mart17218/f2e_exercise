@@ -17,12 +17,12 @@
 @import '~sass-rem';
 @import '@/assets/scss/_variables.scss';
 .account-box {
-  margin: auto 10px;
+  margin: auto 25px;
 
   .btn-like {
     display: inline-block;
-    margin: auto 10px;
-    font-size: rem(28px);
+    margin: auto 24px;
+    font-size: rem(24px);
   }
 }
 </style>

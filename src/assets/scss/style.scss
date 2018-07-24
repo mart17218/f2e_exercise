@@ -1,13 +1,15 @@
-@import '_variables';
 @import '_mixin';
 @import '_icomoon';
 @import '~sass-rem';
+@import '_variables';
 
+html {
+  @include rem-baseline;
+}
 body {
   margin: 0;
   height: 100vh;
   width: 100vw;
-  font-size: 12px;
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -48,7 +50,7 @@ button {
       > div {
         display: inline-block;
         margin: auto rem(20px);
-        font-size: rem(28px);
+        font-size: rem(24px);
       }
       a {
         color: $white;
