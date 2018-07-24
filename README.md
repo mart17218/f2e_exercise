@@ -19,3 +19,15 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## Docker
+1. Build Image
+    ```console
+    npm run build
+    docker build -t howing-web:last .
+    ```
+
+1.  Run container
+    ```console
+    docker run --rm -p 8080:80 -d howing-web:last
+    ```

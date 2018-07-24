@@ -1,0 +1,17 @@
+language: node_js
+
+node_js:
+  - "8"
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install
+
+script:
+  - npm run build 
+  - docker build -t patricelee/howing-web:last .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push patricelee/howing-web:last
