@@ -1,32 +1,35 @@
 <template>
-  <div class="view-box" id="index">
-    <aside class="flex flex-vertical float-left">
-      <div class="top-block">
-        <div class="profile-photo float-left">
+  <div class="view-box flex flex-vertical">
+    <header>
+      <div class="logo">logo</div>
+      <div class="menu">
+        <div v-for="(item, key) in topMenu" :key="key">
+          <router-link to="/index">{{ item.name }}</router-link>
         </div>
-        <span class="name">Guest</span>
       </div>
-      <div class="main-block">
-        <div v-for="(menu, idx) in asideMenu.main" :key="idx"><router-link :to="'/index/' + menu.path">{{ menu.name }}</router-link></div>
+      <div class="rside-box float-right">
+        <search-bar></search-bar>
+        <account-box></account-box>
       </div>
-      <div class="bottom-block">
-        <div v-for="(menu, idx) in asideMenu.help" :key="idx"><router-link to="/index">{{ menu.name }}</router-link></div>
-      </div>
-    </aside>
-    <article class="main-container">
-      <router-view></router-view>
-    </article>
+    </header>
+    <router-view></router-view>
+    <footer>關於我們</footer>
   </div>
 </template>
 
 <script>
+import searchBar from '@/components/common/search-bar';
+import accountBox from '@/components/common/account-box';
 export default {
   name: 'Main',
+  components: {
+    searchBar,
+    accountBox
+  },
   data() {
     return {
-      asideMenu: {
-        main: [{name: 'Favorite', path: 'collection'}, {name: 'Popular Now', path: 'popular'}],
-        help: [{name: 'Contact Us'}]
+      topMenu: {
+        0: {name: '發掘'}, 1: {name: '電影'}, 2: {name: '電視影集'}, 3: {name: '演員'}
       }
     }
   },

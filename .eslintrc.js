@@ -1,6 +1,6 @@
 module.exports = {
-  "extends": "airbnb-base",
-  "rules": {
+  extends: "airbnb-base",
+  rules: {
     "no-new": "off",
     "object-shorthand": "off",
     "comma-dangle": ["error", "only-multiline"],

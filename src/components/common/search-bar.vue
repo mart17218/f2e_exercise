@@ -1,6 +1,6 @@
 <template>
   <div class="search-bar">
-    <input v-show="false" placeholder="search">
+    <input placeholder="search">
     <button class="submit"><i class="icomoon-ic-search"></i></button>
   </div>
 </template>
