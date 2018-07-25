@@ -1,31 +1,33 @@
 <template>
-<article class="main">
-  <section class="horizonal-slide">
-    <h2>熱門影集</h2>
-    <div class="poster-gallery">
-      <div class="nav-to-left">左</div>
-      <VuePerfectScrollbar class="carousel-list">
-        <div v-for="(obj, key) in seriesData" :key="key" class="poster-block">
-          <div><img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path"></div>
-          <div class="mov-title">{{ obj.title }}</div>
-        </div>
-      </VuePerfectScrollbar>
-      <div class="nav-to-right">右</div>
-    </div>
-  </section>
-  <section class="horizonal-slide">
-    <h2>熱門電影</h2>
-    <div class="poster-gallery">
-      <div class="nav-to-left">左</div>
-      <VuePerfectScrollbar class="carousel-list">
-        <div v-for="(obj, key) in seriesData" :key="key" class="poster-block">
-          <div><img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path"></div>
-          <div class="mov-title">{{ obj.title }}</div>
-        </div>
-      </VuePerfectScrollbar>
-      <div class="nav-to-right">右</div>
-    </div>
-  </section>
+<article class="main flex">
+  <VuePerfectScrollbar>
+    <section class="horizonal-slide">
+      <h2>熱門影集</h2>
+      <div class="poster-gallery">
+        <div class="nav-to-left">左</div>
+        <VuePerfectScrollbar class="carousel-list">
+          <div v-for="(obj, key) in seriesData" :key="key" class="poster-block">
+            <div><img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path"></div>
+            <div class="mov-title">{{ obj.title }}</div>
+          </div>
+        </VuePerfectScrollbar>
+        <div class="nav-to-right">右</div>
+      </div>
+    </section>
+    <section class="horizonal-slide">
+      <h2>熱門電影</h2>
+      <div class="poster-gallery">
+        <div class="nav-to-left">左</div>
+        <VuePerfectScrollbar class="carousel-list">
+          <div v-for="(obj, key) in seriesData" :key="key" class="poster-block">
+            <div><img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path"></div>
+            <div class="mov-title">{{ obj.title }}</div>
+          </div>
+        </VuePerfectScrollbar>
+        <div class="nav-to-right">右</div>
+      </div>
+    </section>
+  </VuePerfectScrollbar>
 </article>
 </template>
 
@@ -87,7 +89,7 @@ export default {
   overflow-x: hidden;
   white-space: nowrap;
   background: rgba(233, 233, 233, 0.3);
-  padding: 0 50px;
+  padding: 0 10px;
   position: relative;
 
   [class*="nav-to-"] {
@@ -108,9 +110,11 @@ export default {
   .nav-to-left {
     left: 0;
     text-align: right;
+    background: linear-gradient(to right, rgba(30, 40, 49, 1) 0%,rgba(30, 40, 49, 0.01) 100%);
   }
   .nav-to-right {
     right: 0;
+    background: linear-gradient(to right, rgba(30, 40, 49, 0.01) 0%,rgba(30, 40, 49, 1) 100%);
   }
   .poster-block {
     $p-width: 185px;

@@ -2,6 +2,7 @@
 @import '_icomoon';
 @import '~sass-rem';
 @import '_variables';
+@import '_rwd';
 
 html {
   @include rem-baseline;
@@ -19,6 +20,9 @@ button {
   border: none;
   outline: none;
   cursor: pointer;
+}
+a {
+  color: $white;
 }
 
 .view-box {
@@ -42,7 +46,6 @@ button {
       }
     }
     .logo {
-      width: 320px;
       padding-left: 4.5%;
       font-size: rem(36px);
     }
@@ -52,16 +55,14 @@ button {
         margin: auto rem(20px);
         font-size: rem(24px);
       }
-      a {
-        color: $white;
-      }
+    }
+    .ic-m-menu {
+      padding-left: 1%;
+      font-size: rem(36px);
     }
     .rside-box {
       > div {
         display: inline-block;
-      }
-      a {
-        color: $white;
       }
     }
   }
@@ -83,6 +84,6 @@ button {
 .float-right {
   float: right;
 }
-.pointer {
+.icon, .pointer {
   cursor: pointer;
 }
