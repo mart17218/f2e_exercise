@@ -4,27 +4,45 @@
     <section class="horizonal-slide">
       <h2>熱門影集</h2>
       <div class="poster-gallery">
-        <div class="nav-to-left">左</div>
-        <VuePerfectScrollbar class="carousel-list">
+        <div class="pointer nav-to-left" @click="shift2('left')"><i class="icomoon-arrow-left2"></i></div>
+        <VuePerfectScrollbar ref="scroll1" class="carousel-list">
           <div v-for="(obj, key) in seriesData" :key="key" class="poster-block">
             <div><img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path"></div>
             <div class="mov-title">{{ obj.title }}</div>
+            <div class="rank-block">
+              <i class="icomoon-ic-smile"></i>
+              <div class="progbar-container">
+                <div class="rank-percentage"><span>0%</span><span class="float-right">0%</span></div>
+                <Progress :percent="0" :stroke-width="6" hide-info/>
+                <div class="rank-comment">目前尚未有人評分</div>
+              </div>
+              <i class="icomoon-ic-sad"></i>
+            </div>
           </div>
         </VuePerfectScrollbar>
-        <div class="nav-to-right">右</div>
+        <div class="pointer nav-to-right" @click="shift2('right')"><i class="icomoon-arrow-right2"></i></div>
       </div>
     </section>
     <section class="horizonal-slide">
       <h2>熱門電影</h2>
       <div class="poster-gallery">
-        <div class="nav-to-left">左</div>
+        <div class="pointer nav-to-left"><i class="icomoon-arrow-left2"></i></div>
         <VuePerfectScrollbar class="carousel-list">
-          <div v-for="(obj, key) in seriesData" :key="key" class="poster-block">
+          <div v-for="(obj, key) in movieData" :key="key" class="poster-block">
             <div><img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path"></div>
             <div class="mov-title">{{ obj.title }}</div>
+            <div class="rank-block">
+              <i class="icomoon-ic-smile"></i>
+              <div class="progbar-container">
+                <div class="rank-percentage"><span>0%</span><span class="float-right">0%</span></div>
+                <Progress :percent="0" :stroke-width="6" hide-info/>
+                <div class="rank-comment">目前尚未有人評分</div>
+              </div>
+              <i class="icomoon-ic-sad"></i>
+            </div>
           </div>
         </VuePerfectScrollbar>
-        <div class="nav-to-right">右</div>
+        <div class="pointer nav-to-right"><i class="icomoon-arrow-right2"></i></div>
       </div>
     </section>
   </VuePerfectScrollbar>
@@ -41,12 +59,22 @@ export default {
   },
   data() {
     return {
+      scrollHorizonDistance: 185,
+      scrollbarPosition: {
+          'scroll1': 0,
+          'scroll2': 0
+        },
+      movieData: {},
       seriesData: {}
     };
   },
   created: function () {
-    this.getData();
+    let vm = this;
+    vm.getData('seriesData', {page: 1, limit: 10, sort_by: 'popularity.desc'});
+    vm.getData('movieData', {page: 2, limit: 10, sort_by: 'popularity.desc'});
+    
   },
+  mounted () {},
   methods: {
     SDATA: function (info) {
       return {
@@ -58,25 +86,34 @@ export default {
         popularity: info.popularity
       };
     },
-    getData: function () {
+    getData: function (targetData, p) {
       let vm = this;
       vm.$axios
       .get('https://howing.co/api/v1/movies', {
-        params: { page: 1, limit: 10, sort_by: 'popularity.desc'}
+        params: { page: p.page, limit: p.limit, sort_by: p.sort_by}
       })
       .then(function (resp) {
         let _data = resp.data;
         _.forEach(_data.results, function(val, key) {
           let sData = vm.SDATA(val);
-          vm.$set(vm.seriesData, key, sData);
+          vm.$set(vm[targetData], key, sData);
         });
       });
+    },
+    shift2: function (direction) {
+      let vm = this;
+      if (direction == 'left') {
+        vm.$refs.scroll1.$el.scrollLeft = 0;
+      }
+      else if (direction == 'right') {
+        vm.$refs.scroll1.$el.scrollLeft = vm.scrollHorizonDistance;
+      }
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~sass-rem';
 @import '@/assets/scss/_variables.scss';
 .horizonal-slide {
@@ -134,6 +171,35 @@ export default {
       font-size: rem(18px);
       margin: 0 6px 6px;
     }
+    .rank-block {
+      font-size: rem(18px);
+      display: flex;
+      i {
+        flex: 0;
+        margin: auto 6px;
+      }
+      .progbar-container {
+        flex: 1;
+        display: inline-block;
+
+        .rank-percentage {
+          font-size: 14px;
+        }
+        .rank-comment {
+          font-size: 14px;
+          text-align: center;
+          padding-bottom: 6px;
+        }
+      }
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.progbar-container {
+  .ivu-progress {
+    display: flex;
   }
 }
 </style>

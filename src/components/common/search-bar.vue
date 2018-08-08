@@ -16,6 +16,7 @@
 </script>
 
 <style lang="scss">
+  @import '~sass-rem';
   @import '@/assets/scss/_variables.scss';
   .search-bar {
     input {
@@ -25,11 +26,10 @@
   }
   button {
     &.submit {
-      height: 70px;
-      width: 70px;
+      height: 26px;
+      width: 26px;
       border-radius: 50%;
       color: $white;
-      font-size: rem(16px);
       background: $midGreen;
       background-image: linear-gradient(-180deg, #69d5b3 7%, $midGreen 100%);
       background-position: center center;
