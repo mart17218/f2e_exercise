@@ -22,7 +22,7 @@
   .btn-like {
     display: inline-block;
     margin: auto 24px;
-    font-size: rem(24px);
+    font-size: rem(20px);
   }
 }
 </style>

@@ -154,7 +154,7 @@ export default {
     background: linear-gradient(to right, rgba(30, 40, 49, 0.01) 0%,rgba(30, 40, 49, 1) 100%);
   }
   .poster-block {
-    $p-width: 185px;
+    $p-width: 195px;
     width: $p-width + 2px;
     margin: rem(12px) rem(16px);
     border: 1px solid $white;

@@ -1,6 +1,6 @@
 <template>
   <div class="search-bar">
-    <input placeholder="search">
+    <input class="simple" placeholder="搜尋">
     <button class="submit"><i class="icomoon-ic-search"></i></button>
   </div>
 </template>
@@ -20,8 +20,13 @@
   @import '@/assets/scss/_variables.scss';
   .search-bar {
     input {
-      padding-left: 2.6rem;
+      padding: 0 12px;
       line-height: 1.8;
+      font-size: rem(16px);
+      &.simple {
+        border: none;
+        border-radius: 3px;
+      }
     }
   }
   button {

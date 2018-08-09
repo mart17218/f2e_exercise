@@ -31,7 +31,7 @@ a {
   background: $darkBlue;
 
   header {
-    height: 120px;
+    height: 86px;
     flex: 0 1 auto;
     
     > div {
@@ -45,6 +45,9 @@ a {
         vertical-align: middle;
       }
     }
+    &.gray {
+      background-color: $darkGray;
+    }
     .logo {
       padding-left: 4.5%;
       font-size: rem(36px);
@@ -53,7 +56,7 @@ a {
       > div {
         display: inline-block;
         margin: auto rem(20px);
-        font-size: rem(24px);
+        font-size: rem(20px);
       }
     }
     .ic-m-menu {
@@ -63,6 +66,28 @@ a {
     .rside-box {
       > div {
         display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+  footer {
+    &.about-us {
+      height: 130px;
+      padding-left: 20%;
+      background-color: #090a0e;
+
+      > div {
+        height: 100%;
+        display: inline-block;
+        > div {
+          height: 50%;
+          button {
+            color: $white;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+        }
       }
     }
   }

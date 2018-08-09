@@ -1,6 +1,6 @@
 <template>
   <div class="view-box flex flex-vertical">
-    <header>
+    <header class="gray">
       <div class="ic-m-menu" @click="toggleMobileMenu()">M</div>
       <div class="logo">logo</div>
       <div class="menu">
@@ -16,7 +16,16 @@
     <mobile-menu v-show="isActive.mMenu" :menuData="topMenu"></mobile-menu>
     <overlay v-show="isActive.mMenu"></overlay>
     <router-view></router-view>
-    <footer>關於我們</footer>
+    <footer class="about-us">
+      <div>
+        <div>
+          <Button type="text">關於我們</Button><Button type="text">連絡我們</Button><Button type="text">隱私權政策</Button>
+        </div>
+        <div>
+          <Button type="text">Copyright</Button><Button type="text">資料取用自TMDB</Button>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
