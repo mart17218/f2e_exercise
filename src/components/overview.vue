@@ -6,7 +6,7 @@
       <div class="poster-gallery">
         <div class="pointer nav-to-left" @click="shift2('left')"><i class="icomoon-arrow-left2"></i></div>
         <VuePerfectScrollbar ref="scroll1" class="carousel-list">
-          <div v-for="(obj, key) in seriesData" :key="key" class="poster-block">
+          <div v-for="(obj, key) in seriesData" :key="key" @mouseenter="showHoverBox(obj.id)" @mouseleave="hideHoverBox(obj.id)" class="poster-block">
             <div><img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path"></div>
             <div class="mov-title">{{ obj.title }}</div>
             <div class="rank-block">
@@ -17,6 +17,17 @@
                 <div class="rank-comment">目前尚未有人評分</div>
               </div>
               <i class="icomoon-ic-sad"></i>
+            </div>
+            <div class="block-mask" v-show="obj.show">
+              <div v-if="obj.overview">
+                <div class="title">{{ obj.title }}</div>
+                <div class="subtitle">subtitle</div>
+                <div class="details">{{ obj.overview }}</div>
+              </div>
+              <div v-else>
+                loading ...
+              </div>
+              <Button class="more">瀏覽更多</Button>
             </div>
           </div>
         </VuePerfectScrollbar>
@@ -61,9 +72,9 @@ export default {
     return {
       scrollHorizonDistance: 185,
       scrollbarPosition: {
-          'scroll1': 0,
-          'scroll2': 0
-        },
+        'scroll1': 0,
+        'scroll2': 0
+      },
       movieData: {},
       seriesData: {}
     };
@@ -96,11 +107,13 @@ export default {
         let _data = resp.data;
         _.forEach(_data.results, function(val, key) {
           let sData = vm.SDATA(val);
-          vm.$set(vm[targetData], key, sData);
+          vm.$set(vm[targetData], sData.id, sData);
+          vm.$set(vm[targetData][sData.id], 'show', false);
         });
       });
     },
     shift2: function (direction) {
+      // @TODO
       let vm = this;
       if (direction == 'left') {
         vm.$refs.scroll1.$el.scrollLeft = 0;
@@ -108,6 +121,26 @@ export default {
       else if (direction == 'right') {
         vm.$refs.scroll1.$el.scrollLeft = vm.scrollHorizonDistance;
       }
+    },
+    showHoverBox: function (id) {
+      let vm = this;
+      // @TODO: add loading animation
+      // @TODO: extends to movieData
+      vm.$set(vm.seriesData[id], 'show', true);
+      if(!vm.seriesData[id].overview) {
+        vm.$axios
+        .get('https://howing.co/api/v1/movies/' + id)
+        .then(function (resp) {
+          let _data = resp.data;
+          
+          vm.$set(vm.seriesData[id], 'overview', _data.overview);
+        });
+      }
+    },
+    hideHoverBox: function (id) {
+      let vm = this;
+
+      vm.$set(vm.seriesData[id], 'show', false);
     }
   }
 }
@@ -159,6 +192,7 @@ export default {
     margin: rem(12px) rem(16px);
     border: 1px solid $white;
     display: inline-block;
+    position: relative;
 
     img {
       width: $p-width;
@@ -191,6 +225,26 @@ export default {
           padding-bottom: 6px;
         }
       }
+    }
+  }
+  .block-mask {
+    position: absolute;
+    top: 0; bottom: 0;
+    right: 0; left: 0;
+    background: rgba(0, 0, 0, 0.68);
+    margin: -8px -10px;
+    text-align: center;
+
+    .details {
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .more {
+      color: $black;
+      font-size: rem(14px);
+      background-color: #d2b706;
+      border: none;
     }
   }
 }
