@@ -6,8 +6,21 @@
       <div class="poster-gallery">
         <div class="pointer nav-to-left" @click="shift2('left')"><i class="icomoon-arrow-left2"></i></div>
         <VuePerfectScrollbar ref="scroll1" class="carousel-list">
-          <div v-for="(obj, key) in seriesData" :key="key" @mouseenter="showHoverBox(obj.id)" @mouseleave="hideHoverBox(obj.id)" class="poster-block">
-            <div><img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path"></div>
+          <div v-for="(obj, key) in seriesData" :key="key" class="poster-block">
+            <div class="image-box" @mouseenter="showHoverBox(obj.id)" @mouseleave="hideHoverBox(obj.id)">
+              <img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path">
+              <div class="box-mask" v-show="obj.show">
+                <div v-if="obj.overview">
+                  <div class="title">{{ obj.title }}</div>
+                  <div class="subtitle">subtitle</div>
+                  <div class="details">{{ obj.overview }}</div>
+                </div>
+                <div v-else>
+                  loading ...
+                </div>
+                <Button class="more">瀏覽更多</Button>
+              </div>
+            </div>
             <div class="mov-title">{{ obj.title }}</div>
             <div class="rank-block">
               <i class="icomoon-ic-smile"></i>
@@ -17,17 +30,6 @@
                 <div class="rank-comment">目前尚未有人評分</div>
               </div>
               <i class="icomoon-ic-sad"></i>
-            </div>
-            <div class="block-mask" v-show="obj.show">
-              <div v-if="obj.overview">
-                <div class="title">{{ obj.title }}</div>
-                <div class="subtitle">subtitle</div>
-                <div class="details">{{ obj.overview }}</div>
-              </div>
-              <div v-else>
-                loading ...
-              </div>
-              <Button class="more">瀏覽更多</Button>
             </div>
           </div>
         </VuePerfectScrollbar>
@@ -40,7 +42,9 @@
         <div class="pointer nav-to-left"><i class="icomoon-arrow-left2"></i></div>
         <VuePerfectScrollbar class="carousel-list">
           <div v-for="(obj, key) in movieData" :key="key" class="poster-block">
-            <div><img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path"></div>
+            <div class="image-box">
+              <img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path">
+            </div>
             <div class="mov-title">{{ obj.title }}</div>
             <div class="rank-block">
               <i class="icomoon-ic-smile"></i>
@@ -168,7 +172,8 @@ export default {
     top: 0;
     position: absolute;
     z-index: 1;
-    font-size: rem(86px);
+    font-size: rem(66px);
+    color: rgba(255, 255, 255, 0.6);
     
     &:before {
       content: "";
@@ -188,22 +193,76 @@ export default {
   }
   .poster-block {
     $p-width: 195px;
-    width: $p-width + 2px;
+    $p-margin: 8px;
+    width: $p-width + ($p-margin * 2);
     margin: rem(12px) rem(16px);
-    border: 1px solid $white;
     display: inline-block;
-    position: relative;
+    border-radius: 2px;
+    color: $darkBlue;
+    background-color: rgba(221, 221, 221, 0.52);
 
-    img {
-      width: $p-width;
-      height: $p-width * 1.48;
+    .image-box {
+      position: relative;
+      margin: $p-margin $p-margin 0;
+      color: $white;
+
+      img {
+        width: $p-width;
+        height: $p-width * 1.48;
+        display: block;
+        margin: auto;
+      }
+      .box-mask {
+        position: absolute;
+        top: 0; bottom: 0;
+        right: 0; left: 0;
+        background: rgba(0, 0, 0, 0.68);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+
+        > div {
+          height: calc(100% - 45px);
+          width: 100%;
+          position: absolute;
+          overflow: hidden;
+          padding: 3px 3px 0;
+
+          .title {
+            font-size: rem(18px);
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            text-align: left;
+          }
+          .subtitle {
+            text-align: left;
+          }
+          .details {
+            white-space: normal;
+            text-align: justify;
+          }
+        }
+        button.more {
+          color: $black;
+          font-size: rem(14px);
+          background-color: #d2b706;
+          border: none;
+          position: absolute;
+          bottom: 6px;
+          left: 0; right: 0;
+          margin: 0 auto;
+          width: 86px;
+        }
+      }
     }
     .mov-title {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       font-size: rem(18px);
-      margin: 0 6px 6px;
+      margin: 0 8px 6px;
+      font-weight: 600;
     }
     .rank-block {
       font-size: rem(18px);
@@ -225,26 +284,6 @@ export default {
           padding-bottom: 6px;
         }
       }
-    }
-  }
-  .block-mask {
-    position: absolute;
-    top: 0; bottom: 0;
-    right: 0; left: 0;
-    background: rgba(0, 0, 0, 0.68);
-    margin: -8px -10px;
-    text-align: center;
-
-    .details {
-      white-space: normal;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .more {
-      color: $black;
-      font-size: rem(14px);
-      background-color: #d2b706;
-      border: none;
     }
   }
 }
