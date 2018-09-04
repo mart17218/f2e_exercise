@@ -8,6 +8,7 @@ import moment from 'moment';
 import Main from './Main';
 import Login from './Login';
 import router from './router';
+import i18n from './lang';
 
 import './assets/scss/iview-custom.less';
 
@@ -30,6 +31,7 @@ if (signUp) {
   new Vue({
     el: '#app',
     router: router,
+    i18n,
     components: { Login },
     template: '<Login/>'
   });
@@ -37,6 +39,7 @@ if (signUp) {
   new Vue({
     el: '#app',
     router: router,
+    i18n,
     components: { Main },
     template: '<Main/>'
   });

@@ -17,6 +17,7 @@
     "popper.js": "^1.14.3",
     "sass-rem": "^2.0.1",
     "vue": "^2.5.2",
+    "vue-i18n": "^8.1.0",
     "vue-lodash": "^2.0.0",
     "vue-perfect-scrollbar": "^0.1.0",
     "vue-router": "^3.0.1"
