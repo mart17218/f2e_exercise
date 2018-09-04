@@ -18,7 +18,7 @@
                 <div v-else>
                   loading ...
                 </div>
-                <Button class="more">瀏覽更多</Button>
+                <Button class="more"><router-link to="/movieInfo">瀏覽更多</router-link></Button>
               </div>
             </div>
             <div class="mov-title">{{ obj.title }}</div>
