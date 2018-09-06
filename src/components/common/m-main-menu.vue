@@ -26,7 +26,7 @@
 @import '~sass-rem';
 @import '@/assets/scss/_variables.scss';
 .mobile-menu {
-  top: 120px;
+  top: 86px;
   font-size: rem(28px);
   padding: rem(10px 36px);
   background-color: $darkBlue;
