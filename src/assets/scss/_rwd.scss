@@ -14,13 +14,13 @@
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   .view-box header {
     .menu, .rside-box {
-      display: inline-block;
-    }
-    .ic-m-menu {
       display: none;
     }
+    .ic-m-menu {
+      display: inline-block;
+    }
     .logo {
-      width: 320px;
+      width: 200px;
     }
   }
 }
