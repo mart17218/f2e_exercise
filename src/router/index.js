@@ -14,10 +14,12 @@ export default new Router({
       redirect: '/index'
     },
     {
+      name: 'index',
       path: '/index',
       component: overview
     },
     {
+      name: 'movieInfo',
       path: '/movieInfo',
       component: movieInfo
     }
