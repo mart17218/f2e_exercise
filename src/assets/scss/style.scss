@@ -102,6 +102,12 @@ a {
   &.flex-vertical {
     flex-direction: column;
   }
+  .stretch {
+    flex: 1;
+  }
+  .fixed {
+    flex: 0;
+  }
 }
 .float-left {
   float: left;
