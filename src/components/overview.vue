@@ -4,7 +4,7 @@
     <section class="horizonal-slide">
       <h2>熱門影集</h2>
       <div class="poster-gallery">
-        <div class="pointer nav-to-left" @click="shift2('left')"><i class="icomoon-arrow-left2"></i></div>
+        <div class="pointer nav-to-left" @click="shift2('left', 'scroll1')"><i class="icomoon-arrow-left2"></i></div>
         <VuePerfectScrollbar ref="scroll1" class="carousel-list">
           <div v-for="(obj, key) in seriesData" :key="key" class="poster-block">
             <div class="image-box" @mouseenter="showHoverBox(obj.id)" @mouseleave="hideHoverBox(obj.id)">
@@ -33,14 +33,14 @@
             </div>
           </div>
         </VuePerfectScrollbar>
-        <div class="pointer nav-to-right" @click="shift2('right')"><i class="icomoon-arrow-right2"></i></div>
+        <div class="pointer nav-to-right" @click="shift2('right', 'scroll1')"><i class="icomoon-arrow-right2"></i></div>
       </div>
     </section>
     <section class="horizonal-slide">
       <h2>熱門電影</h2>
       <div class="poster-gallery">
-        <div class="pointer nav-to-left"><i class="icomoon-arrow-left2"></i></div>
-        <VuePerfectScrollbar class="carousel-list">
+        <div class="pointer nav-to-left" @click="shift2('left', 'scroll2')"><i class="icomoon-arrow-left2"></i></div>
+        <VuePerfectScrollbar ref="scroll2" class="carousel-list">
           <div v-for="(obj, key) in movieData" :key="key" class="poster-block">
             <div class="image-box">
               <img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path">
@@ -57,7 +57,7 @@
             </div>
           </div>
         </VuePerfectScrollbar>
-        <div class="pointer nav-to-right"><i class="icomoon-arrow-right2"></i></div>
+        <div class="pointer nav-to-right" @click="shift2('right', 'scroll2')"><i class="icomoon-arrow-right2"></i></div>
       </div>
     </section>
   </VuePerfectScrollbar>
@@ -67,6 +67,8 @@
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 
+const RANK_NUM = 10
+
 export default {
   name: 'overview',
   components: {
@@ -74,20 +76,22 @@ export default {
   },
   data() {
     return {
-      scrollHorizonDistance: 185,
-      scrollbarPosition: {
-        'scroll1': 0,
-        'scroll2': 0
-      },
+      scrollHorizonDistance: 243,
       movieData: {},
       seriesData: {}
     };
   },
   created: function () {
     let vm = this;
-    vm.getData('seriesData', {page: 1, limit: 10, sort_by: 'popularity.desc'});
-    vm.getData('movieData', {page: 2, limit: 10, sort_by: 'popularity.desc'});
     
+    // @TODO: page should change
+    vm.getData('seriesData', {page: 1, limit: RANK_NUM, sort_by: 'popularity.desc'});
+    vm.getData('movieData', {page: 2, limit: RANK_NUM, sort_by: 'popularity.desc'});
+  },
+  computed: {
+    RANK_NUM () {
+      return RANK_NUM
+    }
   },
   mounted () {},
   methods: {
@@ -116,15 +120,18 @@ export default {
         });
       });
     },
-    shift2: function (direction) {
-      // @TODO
-      let vm = this;
+    shift2: function (direction, target) {
+      let vm = this
+      let next_pos = -1
+      let curr_pos = vm.$refs[target].$el.scrollLeft
+      let pace = Math.floor(curr_pos / vm.scrollHorizonDistance)
+
       if (direction == 'left') {
-        vm.$refs.scroll1.$el.scrollLeft = 0;
+        next_pos = (pace - 1) * vm.scrollHorizonDistance
+      } else if (direction == 'right') {
+        next_pos = (pace + 1) * vm.scrollHorizonDistance
       }
-      else if (direction == 'right') {
-        vm.$refs.scroll1.$el.scrollLeft = vm.scrollHorizonDistance;
-      }
+      vm.$refs[target].$el.scrollLeft = next_pos
     },
     showHoverBox: function (id) {
       let vm = this;
@@ -160,6 +167,7 @@ export default {
   }
 }
 .poster-gallery {
+  $nav-to-btn-width: 110px;
   overflow-x: hidden;
   white-space: nowrap;
   background: rgba(233, 233, 233, 0.3);
@@ -167,7 +175,7 @@ export default {
   position: relative;
 
   [class*="nav-to-"] {
-    width: 110px;
+    width: $nav-to-btn-width;
     height: 100%;
     top: 0;
     position: absolute;
@@ -190,6 +198,9 @@ export default {
   .nav-to-right {
     right: 0;
     background: linear-gradient(to right, rgba(30, 40, 49, 0.01) 0%,rgba(30, 40, 49, 1) 100%);
+  }
+  .carousel-list {
+    margin: 0 $nav-to-btn-width - 34px;
   }
   .poster-block {
     $p-width: 195px;
