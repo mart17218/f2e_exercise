@@ -1,8 +1,8 @@
 <template>
   <article class="main flex">
-    <Row style="width: 100%;">
-      <Col span="12" offset="6">
-        <VuePerfectScrollbar>
+    <VuePerfectScrollbar>
+      <Row style="width: 100%;">
+        <Col span="12" offset="6">
           <section>
             <header class="movie-details">
               <span class="title">{{ movie.name }}</span>
@@ -18,7 +18,10 @@
           </section>
           <section class="flex">
             <aside class="float-left fixed">
-              照片 評分 等等
+              <img :src="'https://image.tmdb.org/t/p/w185/' + movie.poster_path">
+              分數 觀看 收藏
+              <score-bar></score-bar>
+              評論
             </aside>
             <div class="float-left stretch" style="margin-left: 36px;">
               <div>
@@ -36,19 +39,21 @@
               </div>
             </div>
           </section>
-        </VuePerfectScrollbar>
-      </Col>
-    </Row>
+        </Col>
+      </Row>
+    </VuePerfectScrollbar>
   </article>
 </template>
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
+import scoreBar from './common/score-bar';
 
 export default {
   name: 'movieInfo',
   components: {
-    VuePerfectScrollbar
+    VuePerfectScrollbar,
+    scoreBar
   },
   data() {
     return {
@@ -58,7 +63,8 @@ export default {
         release_date: 'N/A',
         runtime: 0,
         director: 'N/A',
-        description: 'N/A'
+        description: 'N/A',
+        poster_path: ''
       }
     }
   },
@@ -73,6 +79,7 @@ export default {
         vm.movie.name = _data.title
         vm.movie.release_date = vm.$moment(_data.releaseDate).format('YYYY/MM')
         vm.movie.description = _data.overview
+        vm.movie.poster_path = _data.posterPath
       }
     )
   }

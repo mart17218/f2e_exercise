@@ -22,15 +22,7 @@
               </div>
             </div>
             <div class="mov-title">{{ obj.title }}</div>
-            <div class="rank-block">
-              <i class="icomoon-ic-smile"></i>
-              <div class="progbar-container">
-                <div class="rank-percentage"><span>0%</span><span class="float-right">0%</span></div>
-                <Progress :percent="0" :stroke-width="6" hide-info/>
-                <div class="rank-comment">目前尚未有人評分</div>
-              </div>
-              <i class="icomoon-ic-sad"></i>
-            </div>
+            <score-bar></score-bar>
           </div>
         </VuePerfectScrollbar>
         <div class="pointer nav-to-right" @click="shift2('right', 'scroll1')"><i class="icomoon-arrow-right2"></i></div>
@@ -46,15 +38,7 @@
               <img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path">
             </div>
             <div class="mov-title">{{ obj.title }}</div>
-            <div class="rank-block">
-              <i class="icomoon-ic-smile"></i>
-              <div class="progbar-container">
-                <div class="rank-percentage"><span>0%</span><span class="float-right">0%</span></div>
-                <Progress :percent="0" :stroke-width="6" hide-info/>
-                <div class="rank-comment">目前尚未有人評分</div>
-              </div>
-              <i class="icomoon-ic-sad"></i>
-            </div>
+            <score-bar></score-bar>
           </div>
         </VuePerfectScrollbar>
         <div class="pointer nav-to-right" @click="shift2('right', 'scroll2')"><i class="icomoon-arrow-right2"></i></div>
@@ -66,13 +50,15 @@
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
+import scoreBar from './common/score-bar';
 
 const RANK_NUM = 10
 
 export default {
   name: 'overview',
   components: {
-    VuePerfectScrollbar
+    VuePerfectScrollbar,
+    scoreBar
   },
   data() {
     return {
@@ -274,27 +260,6 @@ export default {
       font-size: rem(18px);
       margin: 0 8px 6px;
       font-weight: 600;
-    }
-    .rank-block {
-      font-size: rem(18px);
-      display: flex;
-      i {
-        flex: 0;
-        margin: auto 6px;
-      }
-      .progbar-container {
-        flex: 1;
-        display: inline-block;
-
-        .rank-percentage {
-          font-size: 14px;
-        }
-        .rank-comment {
-          font-size: 14px;
-          text-align: center;
-          padding-bottom: 6px;
-        }
-      }
     }
   }
 }
