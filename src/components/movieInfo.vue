@@ -2,7 +2,11 @@
   <article class="main flex">
     <VuePerfectScrollbar>
       <Row style="width: 100%;">
-        <Col span="12" offset="6">
+        <Col
+          :xs="{span: 22, offset: 1}"
+          :sm="{span: 12, offset: 6}"
+          :lg="{span: 12, offset: 6}"
+        >
           <section>
             <header class="movie-details">
               <span class="title">{{ movie.name }}</span>
