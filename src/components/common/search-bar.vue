@@ -15,7 +15,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '~sass-rem';
   @import '@/assets/scss/_variables.scss';
   .search-bar {

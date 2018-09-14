@@ -21,11 +21,15 @@
             </div>
           </section>
           <section class="flex">
-            <aside class="float-left fixed">
+            <aside class="float-left fixed comment-block">
               <img :src="'https://image.tmdb.org/t/p/w185/' + movie.poster_path">
               分數 觀看 收藏
               <score-bar></score-bar>
-              評論
+              <div>
+                <p>我的評論</p>
+                <Input v-model="comment.value" type="textarea" :rows="5" placeholder="請寫下你的評論" />
+                <Button class="submit float-right">送出</Button>
+              </div>
             </aside>
             <div class="float-left stretch" style="margin-left: 36px;">
               <div>
@@ -69,6 +73,9 @@ export default {
         director: 'N/A',
         description: 'N/A',
         poster_path: ''
+      },
+      comment: {
+        value: ''
       }
     }
   },
@@ -105,6 +112,13 @@ export default {
     display: inline-block;
     position: relative;
     vertical-align: middle;
+  }
+}
+.comment-block {
+  button {
+    &.submit {
+      margin-top: 8px;
+    }
   }
 }
 </style>
