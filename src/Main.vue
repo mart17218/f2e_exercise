@@ -1,7 +1,9 @@
 <template>
   <div class="view-box flex flex-vertical">
     <header class="gray">
-      <div class="ic-m-menu" @click="toggleMobileMenu()">M</div>
+      <div class="ic-m-menu" @click="toggleMobileMenu()">
+        <i class="icomoon-ic-menu"></i>
+      </div>
       <div class="logo">logo</div>
       <div class="menu">
         <div v-for="(item, key) in topMenu" :key="key">

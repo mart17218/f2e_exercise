@@ -26,6 +26,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icomoon-ic-menu:before {
+  content: "\e905";
+}
 .icomoon-ic-search:before {
   content: "\e900";
 }
