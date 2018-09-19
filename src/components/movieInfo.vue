@@ -33,16 +33,48 @@
             </aside>
             <div class="float-left stretch" style="margin-left: 36px;">
               <div>
-                <Tabs>
-                  <TabPane label="演員"></TabPane>
-                  <TabPane label="劇組" disabled></TabPane>
-                  <TabPane label="類型" disabled></TabPane>
+                <Tabs class="simple-tab">
+                  <TabPane label="演員">
+                    <div v-if="movie.cast.length === 0">
+                      沒有相關資訊:(
+                    </div>
+                    <div v-else>
+                      <span v-for="(item, key) in movie.cast" :key="key">{{item}}</span>
+                    </div>
+                  </TabPane>
+                  <TabPane label="劇組">
+                    <div v-if="movie.crew.length === 0">
+                      沒有相關資訊:(
+                    </div>
+                    <div v-else>
+                      <span v-for="(item, key) in movie.crew" :key="key">{{item}}</span>
+                    </div>
+                  </TabPane>
+                  <TabPane label="類型">
+                    <div v-if="movie.type.length === 0">
+                      沒有相關資訊:(
+                    </div>
+                    <div v-else>
+                      <span v-for="(item, key) in movie.type" :key="key">{{item}}</span>
+                    </div>
+                  </TabPane>
                 </Tabs>
               </div>
               <div>
-                <Tabs>
-                  <TabPane label="熱門評論"></TabPane>
-                  <TabPane label="近期評論"></TabPane>
+                <Tabs class="simple-tab">
+                  <TabPane label="熱門評論">
+                    Coming soon ;-)
+                  </TabPane>
+                  <TabPane label="近期評論">
+                    Coming soon ;-)
+                  </TabPane>
+                </Tabs>
+              </div>
+              <div>
+                <Tabs class="simple-tab">
+                  <TabPane label="相關作品">
+                    Coming soon ;-)
+                  </TabPane>
                 </Tabs>
               </div>
             </div>
@@ -72,7 +104,10 @@ export default {
         runtime: 0,
         director: 'N/A',
         description: 'N/A',
-        poster_path: ''
+        poster_path: '',
+        cast: [],
+        crew: ['larry'],
+        type: ['scary', 'action']
       },
       comment: {
         value: ''
@@ -98,12 +133,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~sass-rem';
+@import '@/assets/scss/_variables.scss';
 .movie-details {
   .title {
-    font-size: 24px;
+    font-size: rem(24px);
   }
   .date {
-    font-size: 14px;
+    font-size: rem(14px);
     margin-left: 10px;
   }
   &:before {
@@ -118,6 +155,20 @@ export default {
   button {
     &.submit {
       margin-top: 8px;
+    }
+  }
+}
+.simple-tab {
+  .ivu-tabs-tabpane {
+    padding: 0px 5px 20px;
+    color: $white;
+
+    span {
+      padding: 0 12px;
+      margin-right: 10px;
+      border-radius: 3px;
+      background-color: rgba(255, 255, 255, 0.19);
+      display: inline-block;
     }
   }
 }
