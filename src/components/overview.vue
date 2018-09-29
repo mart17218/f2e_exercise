@@ -7,7 +7,7 @@
         <div class="pointer nav-to-left" @click="shift2('left', 'scroll1')"><i class="icomoon-arrow-left2"></i></div>
         <VuePerfectScrollbar ref="scroll1" class="carousel-list">
           <div v-for="(obj, key) in seriesData" :key="key" class="poster-block">
-            <div class="image-box" @mouseenter="showHoverBox(obj.id)" @mouseleave="hideHoverBox(obj.id)">
+            <div class="image-box" @mouseenter="showHoverBox('seriesData', obj.id)" @mouseleave="hideHoverBox('seriesData', obj.id)">
               <img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path">
               <div class="box-mask" v-show="obj.show">
                 <div v-if="obj.overview">
@@ -16,9 +16,9 @@
                   <div class="details">{{ obj.overview }}</div>
                 </div>
                 <div v-else>
-                  loading ...
+                  目前沒有相關資訊
                 </div>
-                <Button class="more"><router-link :to="{name: 'movieInfo', query: {mid: obj.id}}">瀏覽更多</router-link></Button>
+                <Button class="more" disabled><router-link :to="{name: 'movieInfo', query: {mid: obj.id}}">瀏覽更多</router-link></Button>
               </div>
             </div>
             <div class="mov-title">{{ obj.title }}</div>
@@ -34,8 +34,19 @@
         <div class="pointer nav-to-left" @click="shift2('left', 'scroll2')"><i class="icomoon-arrow-left2"></i></div>
         <VuePerfectScrollbar ref="scroll2" class="carousel-list">
           <div v-for="(obj, key) in movieData" :key="key" class="poster-block">
-            <div class="image-box">
+            <div class="image-box" @mouseenter="showHoverBox('movieData', obj.id)" @mouseleave="hideHoverBox('movieData', obj.id)">
               <img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path">
+              <div class="box-mask" v-show="obj.show">
+                <div v-if="obj.overview">
+                  <div class="title">{{ obj.title }}</div>
+                  <div class="subtitle">subtitle</div>
+                  <div class="details">{{ obj.overview }}</div>
+                </div>
+                <div v-else>
+                  目前沒有相關資訊
+                </div>
+                <Button class="more"><router-link :to="{name: 'movieInfo', query: {mid: obj.id}}">瀏覽更多</router-link></Button>
+              </div>
             </div>
             <div class="mov-title">{{ obj.title }}</div>
             <score-bar></score-bar>
@@ -87,7 +98,8 @@ export default {
         title_en: info.originalTitle,
         poster_path: info.posterPath,
         backdrop_path: info.backdropPath,
-        popularity: info.popularity
+        popularity: info.popularity,
+        overview: info.overview
       };
     },
     getData: function (targetType, p) {
@@ -123,25 +135,15 @@ export default {
       }
       vm.$refs[target].$el.scrollLeft = next_pos
     },
-    showHoverBox: function (id) {
-      let vm = this;
-      // @TODO: add loading animation
-      // @TODO: extends to movieData
-      vm.$set(vm.seriesData[id], 'show', true);
-      if(!vm.seriesData[id].overview) {
-        vm.$axios
-        .get('https://howing.co/api/v1/movies/' + id)
-        .then(function (resp) {
-          let _data = resp.data;
-          
-          vm.$set(vm.seriesData[id], 'overview', _data.overview);
-        });
-      }
-    },
-    hideHoverBox: function (id) {
+    showHoverBox: function (dataType, id) {
       let vm = this;
 
-      vm.$set(vm.seriesData[id], 'show', false);
+      this.$set(vm[dataType][id], 'show', true);
+    },
+    hideHoverBox: function (dataType, id) {
+      let vm = this;
+
+      vm.$set(vm[dataType][id], 'show', false);
     }
   }
 }
@@ -227,7 +229,7 @@ export default {
           width: 100%;
           position: absolute;
           overflow: hidden;
-          padding: 3px 3px 0;
+          padding: 3px 7px 0;
 
           .title {
             font-size: rem(18px);
