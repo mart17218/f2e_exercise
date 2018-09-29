@@ -4,7 +4,7 @@
       <div class="ic-m-menu" @click="toggleMobileMenu()">
         <i class="icomoon-ic-menu"></i>
       </div>
-      <div class="logo">logo</div>
+      <div class="logo" @click="navTo('index')">日日好影</div>
       <div class="menu">
         <div v-for="(item, key) in topMenu" :key="key">
           <router-link to="/index">{{ item.name }}</router-link>
@@ -59,6 +59,9 @@ export default {
   },
   created: function() {},
   methods: {
+    navTo: function (path) {
+      this.$router.push(path)
+    },
     toggleMobileMenu: function () {
       let vm = this;
       vm.isActive.mMenu = !vm.isActive.mMenu;
