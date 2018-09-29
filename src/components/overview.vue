@@ -74,8 +74,8 @@ export default {
   data() {
     return {
       scrollHorizonDistance: 243,
-      movieData: {},
-      seriesData: {}
+      movieData: [],
+      seriesData: []
     };
   },
   created: function () {
@@ -117,8 +117,9 @@ export default {
         let _data = resp.data;
         _.forEach(_data.results, function(val, key) {
           let sData = vm.SDATA(val);
-          vm.$set(vm[targetType], sData.id, sData);
-          vm.$set(vm[targetType][sData.id], 'show', false);
+
+          vm.$set(vm[targetType], key, sData);
+          vm.$set(vm[targetType][key], 'show', false);
         });
       });
     },
@@ -137,13 +138,15 @@ export default {
     },
     showHoverBox: function (dataType, id) {
       let vm = this;
+      const index = _.findIndex(vm[dataType], { 'id': id })
 
-      this.$set(vm[dataType][id], 'show', true);
+      this.$set(vm[dataType][index], 'show', true);
     },
     hideHoverBox: function (dataType, id) {
       let vm = this;
+      const index = _.findIndex(vm[dataType], { 'id': id })
 
-      vm.$set(vm[dataType][id], 'show', false);
+      vm.$set(vm[dataType][index], 'show', false);
     }
   }
 }
