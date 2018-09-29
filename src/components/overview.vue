@@ -69,10 +69,9 @@ export default {
   },
   created: function () {
     let vm = this;
-    
-    // @TODO: page should change
+
     vm.getData('seriesData', {page: 1, limit: RANK_NUM, sort_by: 'popularity.desc'});
-    vm.getData('movieData', {page: 2, limit: RANK_NUM, sort_by: 'popularity.desc'});
+    vm.getData('movieData', {page: 1, limit: RANK_NUM, sort_by: 'popularity.desc'});
   },
   computed: {
     RANK_NUM () {
@@ -91,18 +90,23 @@ export default {
         popularity: info.popularity
       };
     },
-    getData: function (targetData, p) {
+    getData: function (targetType, p) {
       let vm = this;
+      const typeMapping = {
+        movieData: 'movies',
+        seriesData: 'tv'
+      };
+
       vm.$axios
-      .get('https://howing.co/api/v1/movies', {
+      .get('https://howing.co/api/v1/' + typeMapping[targetType], {
         params: { page: p.page, limit: p.limit, sort_by: p.sort_by}
       })
       .then(function (resp) {
         let _data = resp.data;
         _.forEach(_data.results, function(val, key) {
           let sData = vm.SDATA(val);
-          vm.$set(vm[targetData], sData.id, sData);
-          vm.$set(vm[targetData][sData.id], 'show', false);
+          vm.$set(vm[targetType], sData.id, sData);
+          vm.$set(vm[targetType][sData.id], 'show', false);
         });
       });
     },

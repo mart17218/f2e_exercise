@@ -21,10 +21,13 @@
     <footer class="about-us">
       <div>
         <div>
-          <Button type="text">關於我們</Button><Button type="text">連絡我們</Button><Button type="text">隱私權政策</Button>
+          <Button type="text"><router-link to="/aboutUs">關於我們</router-link></Button>
+          <Button type="text">聯繫我們</Button>
+          <Button type="text">隱私權政策</Button>
         </div>
         <div>
-          <Button type="text">Copyright</Button><Button type="text">資料取用自TMDB</Button>
+          <Button type="text">Copyright</Button>
+          <Button type="text">資料取用自TMDB</Button>
         </div>
       </div>
     </footer>
