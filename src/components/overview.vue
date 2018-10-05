@@ -3,77 +3,89 @@
   <VuePerfectScrollbar>
     <section class="horizonal-slide">
       <h2>熱門影集</h2>
-      <div class="poster-gallery">
-        <div class="pointer nav-to-left" @click="shift2('left', 'scroll1')"><i class="icomoon-arrow-left2"></i></div>
-        <VuePerfectScrollbar ref="scroll1" class="carousel-list">
-          <div v-for="(obj, key) in seriesData" :key="key" class="poster-block">
-            <div class="image-box" @mouseenter="showHoverBox('seriesData', obj.id)" @mouseleave="hideHoverBox('seriesData', obj.id)">
-              <img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path">
-              <div class="box-mask" v-show="obj.show">
-                <div v-if="obj.overview">
-                  <div class="title">{{ obj.title }}</div>
-                  <div class="subtitle">subtitle</div>
-                  <div class="details">{{ obj.overview }}</div>
-                </div>
-                <div v-else>
-                  目前沒有相關資訊
-                </div>
-                <Button class="more" disabled><router-link :to="{name: 'movieInfo', query: {mid: obj.id}}">瀏覽更多</router-link></Button>
+      <swiper :options="swiperOption" class="poster-gallery">
+        <swiper-slide v-for="(obj, key) in seriesData" :key="key" class="poster-block">
+          <div class="image-box" @mouseenter="showHoverBox('seriesData', obj.id)" @mouseleave="hideHoverBox('seriesData', obj.id)">
+            <img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path">
+            <div class="box-mask" v-show="obj.show">
+              <div v-if="obj.overview">
+                <div class="title">{{ obj.title }}</div>
+                <div class="subtitle">subtitle</div>
+                <div class="details">{{ obj.overview }}</div>
               </div>
+              <div v-else>
+                目前沒有相關資訊
+              </div>
+              <Button class="more" disabled><router-link :to="{name: 'movieInfo', query: {mid: obj.id}}">瀏覽更多</router-link></Button>
             </div>
-            <div class="mov-title">{{ obj.title }}</div>
-            <score-bar></score-bar>
           </div>
-        </VuePerfectScrollbar>
-        <div class="pointer nav-to-right" @click="shift2('right', 'scroll1')"><i class="icomoon-arrow-right2"></i></div>
-      </div>
+          <div class="mov-title">{{ obj.title }}</div>
+          <score-bar></score-bar>
+        </swiper-slide>
+        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+      </swiper>
     </section>
     <section class="horizonal-slide">
       <h2>熱門電影</h2>
-      <div class="poster-gallery">
-        <div class="pointer nav-to-left" @click="shift2('left', 'scroll2')"><i class="icomoon-arrow-left2"></i></div>
-        <VuePerfectScrollbar ref="scroll2" class="carousel-list">
-          <div v-for="(obj, key) in movieData" :key="key" class="poster-block">
-            <div class="image-box" @mouseenter="showHoverBox('movieData', obj.id)" @mouseleave="hideHoverBox('movieData', obj.id)">
-              <img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path">
-              <div class="box-mask" v-show="obj.show">
-                <div v-if="obj.overview">
-                  <div class="title">{{ obj.title }}</div>
-                  <div class="subtitle">subtitle</div>
-                  <div class="details">{{ obj.overview }}</div>
-                </div>
-                <div v-else>
-                  目前沒有相關資訊
-                </div>
-                <Button class="more"><router-link :to="{name: 'movieInfo', query: {mid: obj.id}}">瀏覽更多</router-link></Button>
+      <swiper :options="swiperOption" class="poster-gallery">
+        <swiper-slide v-for="(obj, key) in movieData" :key="key" class="poster-block">
+          <div class="image-box" @mouseenter="showHoverBox('movieData', obj.id)" @mouseleave="hideHoverBox('movieData', obj.id)">
+            <img :src="'https://image.tmdb.org/t/p/w185/' + obj.poster_path">
+            <div class="box-mask" v-show="obj.show">
+              <div v-if="obj.overview">
+                <div class="title">{{ obj.title }}</div>
+                <div class="subtitle">subtitle</div>
+                <div class="details">{{ obj.overview }}</div>
               </div>
+              <div v-else>
+                目前沒有相關資訊
+              </div>
+              <Button class="more"><router-link :to="{name: 'movieInfo', query: {mid: obj.id}}">瀏覽更多</router-link></Button>
             </div>
-            <div class="mov-title">{{ obj.title }}</div>
-            <score-bar></score-bar>
           </div>
-        </VuePerfectScrollbar>
-        <div class="pointer nav-to-right" @click="shift2('right', 'scroll2')"><i class="icomoon-arrow-right2"></i></div>
-      </div>
+          <div class="mov-title">{{ obj.title }}</div>
+          <score-bar></score-bar>
+        </swiper-slide>
+        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+      </swiper>
     </section>
   </VuePerfectScrollbar>
 </article>
 </template>
 
 <script>
-import VuePerfectScrollbar from 'vue-perfect-scrollbar';
-import scoreBar from './common/score-bar';
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import scoreBar from './common/score-bar'
+
+import 'swiper/dist/css/swiper.css'
 
 const RANK_NUM = 10
 
 export default {
   name: 'overview',
   components: {
+    swiper,
+    swiperSlide,
     VuePerfectScrollbar,
     scoreBar
   },
   data() {
     return {
-      scrollHorizonDistance: 243,
+      swiperOption: {
+        slidesPerView: 'auto',
+        spaceBetween: 30,
+        // loop: true,
+        pagination: {
+          clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
+      },
       movieData: [],
       seriesData: []
     };
@@ -123,19 +135,6 @@ export default {
         });
       });
     },
-    shift2: function (direction, target) {
-      let vm = this
-      let next_pos = -1
-      let curr_pos = vm.$refs[target].$el.scrollLeft
-      let pace = Math.floor(curr_pos / vm.scrollHorizonDistance)
-
-      if (direction == 'left') {
-        next_pos = (pace - 1) * vm.scrollHorizonDistance
-      } else if (direction == 'right') {
-        next_pos = (pace + 1) * vm.scrollHorizonDistance
-      }
-      vm.$refs[target].$el.scrollLeft = next_pos
-    },
     showHoverBox: function (dataType, id) {
       let vm = this;
       const index = _.findIndex(vm[dataType], { 'id': id })
@@ -162,50 +161,17 @@ export default {
   }
 }
 .poster-gallery {
-  $nav-to-btn-width: 110px;
-  overflow-x: hidden;
-  white-space: nowrap;
   background: rgba(233, 233, 233, 0.3);
-  padding: 0 10px;
-  position: relative;
-
-  [class*="nav-to-"] {
-    width: $nav-to-btn-width;
-    height: 100%;
-    top: 0;
-    position: absolute;
-    z-index: 1;
-    font-size: rem(66px);
-    color: rgba(255, 255, 255, 0.6);
-    
-    &:before {
-      content: "";
-      height: 100%;
-      vertical-align: middle;
-      display: inline-block;
-    }
-  }
-  .nav-to-left {
-    left: 0;
-    text-align: right;
-    background: linear-gradient(to right, rgba(30, 40, 49, 1) 0%,rgba(30, 40, 49, 0.01) 100%);
-  }
-  .nav-to-right {
-    right: 0;
-    background: linear-gradient(to right, rgba(30, 40, 49, 0.01) 0%,rgba(30, 40, 49, 1) 100%);
-  }
-  .carousel-list {
-    margin: 0 $nav-to-btn-width - 34px;
-  }
+  padding: 12px 10px;
+  
   .poster-block {
     $p-width: 195px;
     $p-margin: 8px;
     width: $p-width + ($p-margin * 2);
-    margin: rem(12px) rem(16px);
-    display: inline-block;
     border-radius: 2px;
-    color: $darkBlue;
     background-color: rgba(221, 221, 221, 0.52);
+    box-shadow: 0px 1px 10px rgba(255, 255, 255, 0.5);
+    color: $darkBlue;
 
     .image-box {
       position: relative;
