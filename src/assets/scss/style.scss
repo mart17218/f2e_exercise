@@ -103,6 +103,10 @@ a {
   &.flex-vertical {
     flex-direction: column;
   }
+  &.flex-content__start {
+    align-items: flex-start;
+    justify-content: center;
+  }
   .stretch {
     flex: 1;
   }

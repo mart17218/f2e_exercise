@@ -1,7 +1,7 @@
 <template>
   <div class="mobile-menu">
     <div v-for="(item, key) in menuData" :key="key">
-      <router-link to="/index">{{ item.name }}</router-link>
+      <router-link :to="item.path">{{ item.name }}</router-link>
     </div>
     <hr>
     <div>

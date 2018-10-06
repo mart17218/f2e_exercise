@@ -7,7 +7,7 @@
       <div class="logo" @click="navTo('index')">日日好影</div>
       <div class="menu">
         <div v-for="(item, key) in topMenu" :key="key">
-          <router-link to="/index">{{ item.name }}</router-link>
+          <router-link :to="item.path">{{ item.name }}</router-link>
         </div>
       </div>
       <div class="rside-box float-right">
@@ -50,7 +50,10 @@ export default {
   data() {
     return {
       topMenu: {
-        0: {name: '發掘'}, 1: {name: '電影'}, 2: {name: '電視影集'}, 3: {name: '演員'}
+        0: {name: '發掘', path: '/index'},
+        1: {name: '電影', path: '/movieList'},
+        2: {name: '電視影集', path: '/seriesList'},
+        3: {name: '演員', path: '/performer'}
       },
       isActive: {
         mMenu: false
