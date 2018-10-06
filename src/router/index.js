@@ -3,6 +3,7 @@ import Router from 'vue-router';
 // 1st level components
 import overview from '@/components/overview';
 import movieList from '@/components/movieList';
+import seriesList from '@/components/seriesList';
 import movieInfo from '@/components/movieInfo';
 import aboutUs from '@/components/aboutUs';
 
@@ -34,7 +35,7 @@ export default new Router({
     {
       name: 'seriesList',
       path: '/seriesList',
-      component: overview,
+      component: seriesList,
       meta: {
         title: '電視影集'
       }

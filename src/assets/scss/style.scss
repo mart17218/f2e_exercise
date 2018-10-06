@@ -107,6 +107,10 @@ a {
     align-items: flex-start;
     justify-content: center;
   }
+  &.flex-content__center {
+    align-items: center;
+    justify-content: center;
+  }
   .stretch {
     flex: 1;
   }

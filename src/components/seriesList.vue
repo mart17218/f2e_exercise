@@ -15,7 +15,11 @@
         <Input v-model="search.keywords" placeholder="請輸入關鍵字" style="width:200px"></Input>
         <Button>送出</Button>
       </Row>
-      <div v-for="(item, key) in dataList" class="movie-card" :key="key">
+      <div 
+        v-for="(item, key) in dataList"
+        class="movie-card"
+        :key="key"
+      >
         <movie-card
           :title="item.title"
           :overview="item.overview"
@@ -55,7 +59,7 @@ export default {
     let vm = this
     // data for test
     vm.$axios
-    .get('https://howing.co/api/v1/movies', {
+    .get('https://howing.co/api/v1/tv', {
       params: { page: 1, limit: 10, sort_by: 'popularity.desc'}
     })
     .then(function (resp) {
