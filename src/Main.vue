@@ -18,19 +18,6 @@
     <mobile-menu v-show="isActive.mMenu" :menuData="topMenu"></mobile-menu>
     <overlay v-show="isActive.mMenu"></overlay>
     <router-view></router-view>
-    <footer class="about-us">
-      <div>
-        <div>
-          <Button type="text"><router-link to="/aboutUs">關於我們</router-link></Button>
-          <Button type="text">聯繫我們</Button>
-          <Button type="text">隱私權政策</Button>
-        </div>
-        <div>
-          <Button type="text">Copyright</Button>
-          <Button type="text">資料取用自TMDB</Button>
-        </div>
-      </div>
-    </footer>
   </div>
 </template>
 

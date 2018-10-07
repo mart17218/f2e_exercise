@@ -29,6 +29,7 @@
       </div>
     </div>
   </article>
+  <Footer></Footer>
   </VuePerfectScrollbar>
 </template>
 
@@ -36,12 +37,14 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import scoreBar from './common/score-bar';
 import movieCard from './common/movieCard';
+import Footer from './common/footer';
 
 export default {
   name: 'movieList',
   components: {
     VuePerfectScrollbar,
     scoreBar,
+    Footer,
     movieCard
   },
   data() {

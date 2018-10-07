@@ -81,6 +81,7 @@
           </section>
         </Col>
       </Row>
+      <Footer></Footer>
     </VuePerfectScrollbar>
   </article>
 </template>
@@ -88,12 +89,14 @@
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import scoreBar from './common/score-bar';
+import Footer from './common/footer';
 
 export default {
   name: 'movieInfo',
   components: {
     VuePerfectScrollbar,
-    scoreBar
+    scoreBar,
+    Footer
   },
   data() {
     return {

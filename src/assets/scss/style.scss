@@ -71,27 +71,6 @@ a {
       }
     }
   }
-  footer {
-    &.about-us {
-      height: 130px;
-      padding-left: 20%;
-      background-color: #090a0e;
-
-      > div {
-        height: 100%;
-        display: inline-block;
-        > div {
-          height: 50%;
-          button {
-            color: $white;
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-          }
-        }
-      }
-    }
-  }
   article {
     &.main {
       flex: 1 1 auto;

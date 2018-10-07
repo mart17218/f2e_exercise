@@ -51,6 +51,7 @@
         <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
       </swiper>
     </section>
+    <Footer></Footer>
   </VuePerfectScrollbar>
 </article>
 </template>
@@ -59,6 +60,7 @@
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import scoreBar from './common/score-bar'
+import Footer from './common/footer'
 
 import 'swiper/dist/css/swiper.css'
 
@@ -70,7 +72,8 @@ export default {
     swiper,
     swiperSlide,
     VuePerfectScrollbar,
-    scoreBar
+    scoreBar,
+    Footer
   },
   data() {
     return {
