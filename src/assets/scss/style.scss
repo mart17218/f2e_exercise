@@ -49,8 +49,11 @@ a {
       background-color: $darkGray;
     }
     .logo {
-      padding-left: 4.5%;
-      font-size: rem(36px);
+      height: 84%;
+      background-image: url('/static/img/logo.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-left: 4.5%;
       cursor: pointer;
     }
     .menu {

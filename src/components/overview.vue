@@ -165,6 +165,11 @@ export default {
 }
 .poster-gallery {
   background: rgba(233, 233, 233, 0.3);
+  background: linear-gradient(to right, 
+    rgba(233, 233, 233, 0) 0%,
+    rgba(233, 233, 233, 0.3) 10%,
+    rgba(233, 233, 233, 0.3) 90%,
+    rgba(233, 233, 233, 0) 100%);
   padding: 12px 10px;
   
   .poster-block {

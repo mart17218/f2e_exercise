@@ -4,7 +4,7 @@
       <div class="ic-m-menu" @click="toggleMobileMenu()">
         <i class="icomoon-ic-menu"></i>
       </div>
-      <div class="logo" @click="navTo('index')">日日好影</div>
+      <div class="logo" @click="navTo('index')"></div>
       <div class="menu">
         <div v-for="(item, key) in topMenu" :key="key">
           <router-link :to="item.path">{{ item.name }}</router-link>
