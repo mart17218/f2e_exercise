@@ -10,7 +10,7 @@
             <div class="box-mask" v-show="obj.show">
               <div v-if="obj.overview">
                 <div class="title">{{ obj.title }}</div>
-                <div class="subtitle">subtitle</div>
+                <div class="subtitle">導演：{{ obj.director }}</div>
                 <div class="details">{{ obj.overview }}</div>
               </div>
               <div v-else>
@@ -35,7 +35,7 @@
             <div class="box-mask" v-show="obj.show">
               <div v-if="obj.overview">
                 <div class="title">{{ obj.title }}</div>
-                <div class="subtitle">subtitle</div>
+                <div class="subtitle">導演：{{ obj.director }}</div>
                 <div class="details">{{ obj.overview }}</div>
               </div>
               <div v-else>
@@ -114,8 +114,14 @@ export default {
         poster_path: info.posterPath,
         backdrop_path: info.backdropPath,
         popularity: info.popularity,
-        overview: info.overview
+        overview: info.overview,
+        director: info.directing ? this.DIRECTOR_STR(info.directing) : null
       };
+    },
+    DIRECTOR_STR (arr) {
+      // check if isEmpty
+      const name = arr.map(function(val) { return val.name })
+      return name.join(',')
     },
     getData: function (targetType, p) {
       let vm = this;
@@ -217,6 +223,9 @@ export default {
           }
           .subtitle {
             text-align: left;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
           }
           .details {
             white-space: normal;

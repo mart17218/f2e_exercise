@@ -1,25 +1,30 @@
 <template>
   <article class="main flex">
-    <aside>
-      <div>{{ title }}</div>
-    </aside>
-    <section>
-      <VuePerfectScrollbar>
-        <div class="description">
-          {{ description }}
-        </div>
-      </VuePerfectScrollbar>
-    </section>
+    <div class="main-container">
+      <aside>
+        <div class="options">{{ title }}</div>
+      </aside>
+      <section>
+        <VuePerfectScrollbar>
+          <div class="description">
+            {{ description }}
+          </div>
+        </VuePerfectScrollbar>
+      </section>
+    </div>
+    <Footer></Footer>
   </article>
 </template>
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import Footer from './common/footer'
 
 export default {
   name: 'aboutUs',
   components: {
-    VuePerfectScrollbar
+    VuePerfectScrollbar,
+    Footer
   },
   data() {
     return {
@@ -37,14 +42,22 @@ export default {
 @import '~sass-rem';
 @import '@/assets/scss/_variables.scss';
 
-article {
+.main.flex {
+  flex-direction: column;
+}
+.main-container {
+  flex: 1;
+  display: flex;
   > aside {
-    float: left;
-    width: 500px;
+    flex: 0;
     padding: 35px 40px 35px 50px;
     font-size: 28px;
+    .options {
+      white-space: nowrap;
+    }
   }
   > section {
+    flex: 1;
     padding: 40px 80px 80px 32px;
     .description {
       font-size: 18px;
