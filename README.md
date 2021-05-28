@@ -1,6 +1,6 @@
 # f2e_exercise
 
-> A Vue.js project
+> 日日好影 電影介紹平台
 
 ## Build Setup
 
